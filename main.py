@@ -93,7 +93,8 @@ def verificarColisao(snake):
     return False
     
 def gameOver():
-    pass
+    canvas.delete(ALL)
+    canvas.create_text(canvas.winfo_width()/2, canvas.winfo_height()/2, font=("consolas", 70), text="GAME OVER", fill="red", tag="gameover")
 
 def inserindoScore(nome, score):
     dados = []
@@ -112,7 +113,7 @@ def inserindoScore(nome, score):
     if not inserido:
         dados.append([nome, score])
 
-    with open("score.csv", "w", newline='') as arquivo:
+    with open("score.csv", "w", newline="") as arquivo:
         escritor = csv.writer(arquivo)
         escritor.writerows(dados)
 
@@ -141,10 +142,10 @@ y = int((telaHeight / 2) - (janelaHeight / 2))
 
 janela.geometry(f"{janelaWidth}x{janelaHeight}+{x}+{y}")
 
-janela.bind('<Left>',lambda event:trocarDirecao('left'))
-janela.bind('<Right>',lambda event:trocarDirecao('right'))
-janela.bind('<Down>',lambda event:trocarDirecao('down'))
-janela.bind('<Up>',lambda event:trocarDirecao('up'))
+janela.bind("<Left>",lambda event:trocarDirecao("left"))
+janela.bind("<Right>",lambda event:trocarDirecao("right"))
+janela.bind("<Down>",lambda event:trocarDirecao("down"))
+janela.bind("<Up>",lambda event:trocarDirecao("up"))
 
 snake = Snake()
 maca = Maca()
