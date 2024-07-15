@@ -14,15 +14,17 @@ BODY_PARTS = 3
 COR_COBRA = "#00FF00"
 COR_MACA = "#FF0000"
 BACKGROUND_COLOR = "#000000"
-class Snake: 
+
+class Snake:
     pass
+
 class Maca:
     def __init__(self):
-        x = random.randint(0, (GAME_WIDTH/SPACE_SIZE)-1)*SPACE_SIZE
-        y = random.randint(0, (GAME_HEIGHT/SPACE_SIZE)-1)*SPACE_SIZE
-        self.coordinates[x,y]
+        x = random.randint(0, (GAME_WIDTH // SPACE_SIZE) - 1) * SPACE_SIZE
+        y = random.randint(0, (GAME_HEIGHT // SPACE_SIZE) - 1) * SPACE_SIZE
+        self.coordinates = (x, y)
 
-        canvas.create_oval(x,y, x+SPACE_SIZE, y+SPACE_SIZE, fill=COR_MACA)
+        canvas.create_oval(x, y, x + SPACE_SIZE, y + SPACE_SIZE, fill=COR_MACA, tags="maca")
 
 def proxPartida():
     pass
@@ -64,7 +66,7 @@ janela.resizable(False, False)
 score = 0
 direcao = "down"
 
-label = Label(janela, text="Score: {}".format(score),font=("consolas",40))
+label = Label(janela, text="Score: {}".format(score), font=("consolas", 40))
 label.pack()
 
 canvas = Canvas(janela, bg=BACKGROUND_COLOR, height=GAME_HEIGHT, width=GAME_WIDTH)
@@ -77,8 +79,8 @@ janelaHeight = janela.winfo_height()
 telaWidht = janela.winfo_screenwidth()
 telaHeight = janela.winfo_screenheight()
 
-x = int((janelaWidth/2) - (janelaHeight/2))
-y = int((telaHeight/2) - (telaWidht/2))
+x = int((telaWidht / 2) - (janelaWidth / 2))
+y = int((telaHeight / 2) - (janelaHeight / 2))
 
 janela.geometry(f"{janelaWidth}x{janelaHeight}+{x}+{y}")
 
