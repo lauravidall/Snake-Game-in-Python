@@ -78,9 +78,20 @@ def trocarDirecao(novaDirecao):
         if(direcao!="up"):
             direcao = novaDirecao
 
-def verificarColisao():
-    pass
+def verificarColisao(snake):
+    x,y = snake.coordinates[0]
 
+    if(x<0 or x>= GAME_WIDTH):
+        return True
+    elif(y<0 or y>= GAME_HEIGHT):
+        return True
+    
+    for quadrado in snake.coordinates[1:]:
+        if(x==quadrado[0] and y==quadrado[1]):
+            print("GAME OVER")
+            return True
+    return False
+    
 def gameOver():
     pass
 
