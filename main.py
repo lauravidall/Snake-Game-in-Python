@@ -93,6 +93,16 @@ def gameOver():
     canvas.delete(ALL)
     canvas.create_text(canvas.winfo_width()/2, canvas.winfo_height()/2, font=("consolas", 70), text="GAME OVER", fill="red", tag="gameover")
 
+def restartGame():
+    global snake, maca, score, direcao
+    canvas.delete(ALL)
+    snake = Snake()
+    maca = Maca()
+    score = 0
+    direcao = 'down'
+    label.config(text="Score:{}".format(score))
+    nextTurn(snake, maca)
+
 def inserindoScore(nome, score):
     dados = []
     with open("score.csv", "r") as arquivo:
@@ -143,6 +153,9 @@ janela.bind("<Left>",lambda event:trocarDirecao("left"))
 janela.bind("<Right>",lambda event:trocarDirecao("right"))
 janela.bind("<Down>",lambda event:trocarDirecao("down"))
 janela.bind("<Up>",lambda event:trocarDirecao("up"))
+
+restart_button = Button(janela, text="Restart", command=restartGame, font=('consolas', 20))
+restart_button.place(x=0, y=0)
 
 snake = Snake()
 maca = Maca()
