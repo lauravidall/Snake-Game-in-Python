@@ -2,10 +2,33 @@ from tkinter import *
 import random
 import csv
 
+#nome = str(input("Digite o seu nome: "))
+# score = int(input("Digite o seu score: "))
+# inserindoScore(nome, score)
+
+GAME_WIDTH = 700
+GAME_HEIGHT = 700
+VELOCIDADE = 50
+SPACE_SIZE = 50
+BODY_PARTS = 3
+COR_COBRA = "#00FF00"
+COR_MACA = "#FF0000"
+BACKGROUND_COLOR = "#000000"
 class Snake: 
     pass
-
 class Maca:
+    pass
+
+def proxPartida():
+    pass
+
+def trocarDirecao(novaDirecao):
+    pass
+
+def verificarColisao():
+    pass
+
+def gameOver():
     pass
 
 def inserindoScore(nome, score):
@@ -29,7 +52,14 @@ def inserindoScore(nome, score):
         escritor = csv.writer(arquivo)
         escritor.writerows(dados)
 
-nome = str(input("Digite o seu nome: "))
-score = int(input("Digite o seu score: "))
+janela = Tk()
+janela.title("Snake Game")
+janela.resizable(False, False)
 
-inserindoScore(nome, score)
+score = 0
+direcao = "down"
+
+label = Label(janela, text="Score: {}".format(score),font=("consolas",40))
+label.pack()
+
+janela.mainloop()
