@@ -31,7 +31,7 @@ class Maca:
         self.coordinates = (x, y)
         canvas.create_oval(x, y, x + SPACE_SIZE, y + SPACE_SIZE, fill=COR_MACA, tags="maca")
 
-def proximaVirada(snake, maca):
+def nextTurn(snake, maca):
     x, y = snake.coordinates[0]
 
     if direcao == "up":
@@ -51,10 +51,23 @@ def proximaVirada(snake, maca):
     canvas.delete(snake.squares[-1])
     del snake.squares[-1]
 
-    janela.after(VELOCIDADE, proximaVirada, snake, maca)
+    janela.after(VELOCIDADE, nextTurn, snake, maca)
 
 def trocarDirecao(novaDirecao):
-    pass
+    global direcao
+
+    if(novaDirecao=="left"):
+        if(direcao!="right"):
+            direcao = novaDirecao
+    elif(novaDirecao=="right"):
+        if(direcao!="left"):
+            direcao = novaDirecao
+    elif(novaDirecao=="up"):
+        if(direcao!="down"):
+            direcao = novaDirecao
+    elif(novaDirecao=="down"):
+        if(direcao!="up"):
+            direcao = novaDirecao
 
 def verificarColisao():
     pass
@@ -108,9 +121,14 @@ y = int((telaHeight / 2) - (janelaHeight / 2))
 
 janela.geometry(f"{janelaWidth}x{janelaHeight}+{x}+{y}")
 
+janela.bind('<Left>',lambda event:trocarDirecao('left'))
+janela.bind('<Right>',lambda event:trocarDirecao('right'))
+janela.bind('<Down>',lambda event:trocarDirecao('down'))
+janela.bind('<Up>',lambda event:trocarDirecao('up'))
+
 snake = Snake()
 maca = Maca()
 
-proximaVirada(snake, maca)
+nextTurn(snake, maca)
 
 janela.mainloop()
