@@ -2,13 +2,12 @@ from tkinter import *
 import random
 import csv
 
-#nome = str(input("Digite o seu nome: "))
-# score = int(input("Digite o seu score: "))
+#nome = str(input("Digite o seu nome: "))x
 # inserindoScore(nome, score)
 
 GAME_WIDTH = 700
 GAME_HEIGHT = 700
-VELOCIDADE = 50
+VELOCIDADE = 70
 SPACE_SIZE = 50
 BODY_PARTS = 3
 COR_COBRA = "#00FF00"
@@ -47,11 +46,21 @@ def nextTurn(snake, maca):
     square = canvas.create_rectangle(x, y, x + SPACE_SIZE, y + SPACE_SIZE, fill=COR_COBRA)
     snake.squares.insert(0, square)
 
-    del snake.coordinates [-1]
-    canvas.delete(snake.squares[-1])
-    del snake.squares[-1]
+    if(x==maca.coordinates[0] and y==maca.coordinates[1]):
+        global score
+        score+=1
+        label.config(text="Score: {}".format(score))
+        canvas.delete ("maca")
+        maca = Maca()
+    else:
+        del snake.coordinates [-1]
+        canvas.delete(snake.squares[-1])
+        del snake.squares[-1]
 
-    janela.after(VELOCIDADE, nextTurn, snake, maca)
+    if(verificarColisao(snake)):
+        gameOver()
+    else:
+        janela.after(VELOCIDADE, nextTurn, snake, maca)
 
 def trocarDirecao(novaDirecao):
     global direcao
