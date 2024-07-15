@@ -14,27 +14,44 @@ BODY_PARTS = 3
 COR_COBRA = "#00FF00"
 COR_MACA = "#FF0000"
 BACKGROUND_COLOR = "#000000"
-
 class Snake:
     def __init__(self):
         self.body_size = BODY_PARTS
         self.coordinates = []
         self.squares = []
-        for i in range(0, BODY_PARTS) :
+        for i in range(0, BODY_PARTS):
             self.coordinates.append([0, 0])
         for x, y in self.coordinates:
-            square = canvas.create_rectangle(x, y, x+SPACE_SIZE, y+SPACE_SIZE, fill=COR_COBRA, tag="cobra")
+            square = canvas.create_rectangle(x, y, x + SPACE_SIZE, y + SPACE_SIZE, fill=COR_COBRA, tag="snake")
             self.squares.append(square)
 class Maca:
     def __init__(self):
         x = random.randint(0, (GAME_WIDTH // SPACE_SIZE) - 1) * SPACE_SIZE
         y = random.randint(0, (GAME_HEIGHT // SPACE_SIZE) - 1) * SPACE_SIZE
         self.coordinates = (x, y)
-
         canvas.create_oval(x, y, x + SPACE_SIZE, y + SPACE_SIZE, fill=COR_MACA, tags="maca")
 
-def proxPartida():
-    pass
+def proximaVirada(snake, maca):
+    x, y = snake.coordinates[0]
+
+    if direcao == "up":
+        y -= SPACE_SIZE
+    elif direcao == "down":
+        y += SPACE_SIZE
+    elif direcao == "right":
+        x += SPACE_SIZE
+    elif direcao == "left":
+        x -= SPACE_SIZE
+
+    snake.coordinates.insert(0, [x, y])
+    square = canvas.create_rectangle(x, y, x + SPACE_SIZE, y + SPACE_SIZE, fill=COR_COBRA)
+    snake.squares.insert(0, square)
+
+    del snake.coordinates [-1]
+    canvas.delete(snake.squares[-1])
+    del snake.squares[-1]
+
+    janela.after(VELOCIDADE, proximaVirada, snake, maca)
 
 def trocarDirecao(novaDirecao):
     pass
@@ -93,5 +110,7 @@ janela.geometry(f"{janelaWidth}x{janelaHeight}+{x}+{y}")
 
 snake = Snake()
 maca = Maca()
+
+proximaVirada(snake, maca)
 
 janela.mainloop()
