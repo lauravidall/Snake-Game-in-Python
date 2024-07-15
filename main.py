@@ -2,13 +2,10 @@ from tkinter import *
 import random
 import csv
 
-#nome = str(input("Digite o seu nome: "))x
-# inserindoScore(nome, score)
-
 GAME_WIDTH = 700
 GAME_HEIGHT = 700
 VELOCIDADE = 70
-SPACE_SIZE = 50
+SPACE_SIZE = 35
 BODY_PARTS = 3
 COR_COBRA = "#00FF00"
 COR_MACA = "#FF0000"
